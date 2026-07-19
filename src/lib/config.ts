@@ -5,8 +5,7 @@ export const siteConfig = {
   description:
     "HITATCG est une boutique spécialisée dans les cartes à collectionner One Piece : singles, displays et boosters sélectionnés, vendus en live sur Whatnot et disponibles ici en catalogue.",
   whatnotUrl: "https://www.whatnot.com/user/hita_tcg",
-  // TODO: remplace par ton email de contact professionnel.
-  contactEmail: "contact@hitatcg.fr",
+  contactEmail: "contact@hitatcg.com",
   instagramUrl: "https://www.instagram.com/hitatcg",
   stats: {
     followers: "1,5K+",
