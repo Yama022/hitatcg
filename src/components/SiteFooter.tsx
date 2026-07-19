@@ -48,8 +48,18 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="border-t border-ink/10 px-6 py-4 text-center text-xs text-ink-soft">
-        © {new Date().getFullYear()} {siteConfig.name}. Tous droits réservés.
+      <div className="border-t border-ink/10 px-6 py-4">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 text-center text-xs text-ink-soft sm:flex-row sm:justify-between sm:text-left">
+          <p>© {new Date().getFullYear()} {siteConfig.name}. Tous droits réservés.</p>
+          <div className="flex gap-4">
+            <Link href="/mentions-legales" className="hover:text-ink">
+              Mentions légales
+            </Link>
+            <Link href="/confidentialite" className="hover:text-ink">
+              Confidentialité
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
   );
