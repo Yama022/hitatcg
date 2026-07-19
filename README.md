@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HITATCG — Boutique en ligne
 
-## Getting Started
+Site vitrine Next.js pour la boutique de cartes One Piece HITATCG (issue de la chaîne Whatnot).
 
-First, run the development server:
+## Prérequis
+
+Next.js 16 exige **Node.js ≥ 20.9**. La version par défaut de ce Mac (20.8.1) est trop ancienne.
+Une version compatible (20.20.2) a été installée via `nvm` :
+
+```bash
+source ~/.nvm/nvm.sh
+nvm use lts/iron
+```
+
+## Lancer en développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## À personnaliser avant mise en ligne
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **`src/lib/config.ts`** — lien Whatnot réel, email de contact, Instagram.
+- **`src/lib/products.ts`** — catalogue réel (les produits actuels sont des exemples).
+- **`public/products/`** — dépose une photo `<slug>.jpg` par carte pour remplacer le visuel placeholder.
+- **Logo** — dépose le fichier réel (`logo.png` ou `.svg`) dans `public/` et remplace le composant `src/components/Logo.tsx` par une balise `<Image>` pointant dessus. Palette actuelle recréée à la main (encre `#1c1b18`, sakura `#f0a8b4`, ivoire `#f7f2e7`, or `#bd9a4c`).
+- **Avis clients** (`src/app/page.tsx` et `src/app/avis/page.tsx`) — remplace les avis d'exemple par de vrais extraits/captures de tes avis Whatnot.
 
-## Learn More
+## Build production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Déploiement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Projet prêt pour [Vercel](https://vercel.com/new) (gratuit pour ce type de site). Aucune variable d'environnement requise pour l'instant.
