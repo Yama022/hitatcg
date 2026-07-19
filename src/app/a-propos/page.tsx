@@ -4,7 +4,7 @@ import { StatsStrip } from "@/components/StatsStrip";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "À propos — HITATCG",
+  title: "À propos — HitaTCG",
   description:
     "L'histoire de HITATCG, boutique de cartes One Piece née sur Whatnot.",
 };

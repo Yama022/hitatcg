@@ -4,7 +4,7 @@ import { ReviewCard } from "@/components/ReviewCard";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Avis clients — HITATCG",
+  title: "Avis clients — HitaTCG",
   description: "Avis clients récoltés lors des lives Whatnot HITATCG.",
 };
 

@@ -3,7 +3,7 @@ import { CTAButton } from "@/components/CTAButton";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Contact — HITATCG",
+  title: "Contact — HitaTCG",
   description: "Contacter HITATCG par email, Instagram ou Whatnot.",
 };
 

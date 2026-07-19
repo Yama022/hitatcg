@@ -17,7 +17,7 @@ const shipporiMincho = Shippori_Mincho({
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  title: `HitaTCG — ${siteConfig.tagline}`,
   description: siteConfig.description,
 };
 

@@ -3,7 +3,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { getAllProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
-  title: "Catalogue — HITATCG",
+  title: "Catalogue — HitaTCG",
   description: "Cartes gradées et objets 3D One Piece disponibles à la vente chez HITATCG.",
 };
 

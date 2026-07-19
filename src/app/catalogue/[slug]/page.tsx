@@ -16,7 +16,7 @@ export async function generateMetadata(
   const product = getProductBySlug(slug);
   if (!product) return {};
   return {
-    title: `${product.name} — HITATCG`,
+    title: `${product.name} — HitaTCG`,
     description: product.description,
   };
 }
