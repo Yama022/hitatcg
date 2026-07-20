@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProductById } from "@/lib/products";
+import { getAllCategories } from "@/lib/categories";
 import { ProductForm } from "../ProductForm";
 import { updateProduct } from "../../actions";
 
@@ -17,7 +18,10 @@ export default async function EditProductPage(
   const errorMessage =
     typeof searchParams.error === "string" ? searchParams.error : null;
 
-  const product = await getProductById(id);
+  const [product, categories] = await Promise.all([
+    getProductById(id),
+    getAllCategories(),
+  ]);
   if (!product) notFound();
 
   const updateWithId = updateProduct.bind(null, id);
@@ -31,6 +35,7 @@ export default async function EditProductPage(
         <ProductForm
           action={updateWithId}
           product={product}
+          categories={categories}
           errorMessage={errorMessage}
         />
       </div>

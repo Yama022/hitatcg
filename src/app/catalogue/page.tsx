@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { ProductCard } from "@/components/ProductCard";
 import { CatalogueFilters } from "@/components/CatalogueFilters";
-import { getAllProducts, type ProductCategory } from "@/lib/products";
+import { getAllProducts } from "@/lib/products";
+import { getAllCategories } from "@/lib/categories";
 
 export const metadata: Metadata = {
   title: "Catalogue — HitaTCG",
@@ -16,7 +17,7 @@ export default async function CataloguePage(
   const search = typeof searchParams.q === "string" ? searchParams.q : undefined;
   const category =
     typeof searchParams.category === "string" && searchParams.category
-      ? (searchParams.category as ProductCategory)
+      ? searchParams.category
       : undefined;
   const minPrice =
     typeof searchParams.minPrice === "string" && searchParams.minPrice
@@ -27,7 +28,10 @@ export default async function CataloguePage(
       ? Number(searchParams.maxPrice)
       : undefined;
 
-  const products = await getAllProducts({ search, category, minPrice, maxPrice });
+  const [products, categories] = await Promise.all([
+    getAllProducts({ search, category, minPrice, maxPrice }),
+    getAllCategories(),
+  ]);
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
@@ -38,7 +42,7 @@ export default async function CataloguePage(
       </p>
 
       <div className="mt-8">
-        <CatalogueFilters />
+        <CatalogueFilters categories={categories} />
       </div>
 
       {products.length === 0 ? (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CTAButton } from "@/components/CTAButton";
 import { ProductGallery } from "@/components/ProductGallery";
-import { getProductBySlug, categoryLabels } from "@/lib/products";
+import { getProductBySlug } from "@/lib/products";
 import { siteConfig } from "@/lib/config";
 
 export async function generateMetadata(
@@ -36,7 +36,7 @@ export default async function ProductPage(
 
         <div>
           <p className="text-sm font-medium uppercase tracking-wide text-sakura-deep">
-            {categoryLabels[product.category]}
+            {product.categoryLabel}
           </p>
           <h1 className="font-display mt-2 text-3xl font-semibold text-ink">
             {product.name}

@@ -2,9 +2,9 @@
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useState, useTransition } from "react";
-import { categoryLabels } from "@/lib/product-categories";
+import type { Category } from "@/lib/categories";
 
-export function CatalogueFilters() {
+export function CatalogueFilters({ categories }: { categories: Category[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -53,9 +53,9 @@ export function CatalogueFilters() {
           className="mt-1 block w-40 rounded-lg border border-ink/20 bg-white px-3 py-2 text-sm outline-none focus:border-sakura"
         >
           <option value="">Toutes</option>
-          {Object.entries(categoryLabels).map(([value, label]) => (
-            <option key={value} value={value}>
-              {label}
+          {categories.map((cat) => (
+            <option key={cat.id} value={cat.slug}>
+              {cat.label}
             </option>
           ))}
         </select>

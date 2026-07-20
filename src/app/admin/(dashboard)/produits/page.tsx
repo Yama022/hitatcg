@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllProducts, categoryLabels } from "@/lib/products";
+import { getAllProducts } from "@/lib/products";
 import { deleteProduct } from "../actions";
 
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export default async function AdminProductsPage() {
                 </td>
                 <td className="px-4 py-3 font-medium text-ink">{product.name}</td>
                 <td className="px-4 py-3 text-ink-soft">
-                  {categoryLabels[product.category]}
+                  {product.categoryLabel}
                 </td>
                 <td className="px-4 py-3 text-ink-soft">{product.price.toFixed(2)} €</td>
                 <td className="px-4 py-3 text-ink-soft">{product.stock}</td>

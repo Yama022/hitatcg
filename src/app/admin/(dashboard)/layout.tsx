@@ -14,6 +14,9 @@ export default function AdminDashboardLayout({
             <Link href="/admin/produits" className="hover:text-ink">
               Produits
             </Link>
+            <Link href="/admin/categories" className="hover:text-ink">
+              Catégories
+            </Link>
             <Link href="/" className="hover:text-ink" target="_blank">
               Voir le site ↗
             </Link>

@@ -1,15 +1,13 @@
 import { createClient } from "@/lib/supabase/server";
-import type { ProductCategory } from "@/lib/product-categories";
-
-export type { ProductCategory } from "@/lib/product-categories";
-export { categoryLabels } from "@/lib/product-categories";
 
 export type Product = {
   id: string;
   slug: string;
   name: string;
   description: string;
-  category: ProductCategory;
+  categoryId: string;
+  categorySlug: string;
+  categoryLabel: string;
   price: number;
   compareAtPrice: number | null;
   stock: number;
@@ -17,17 +15,19 @@ export type Product = {
   whatnotLink: string | null;
 };
 
+const PRODUCT_SELECT = "*, categories(id, slug, label)";
+
 type ProductRow = {
   id: string;
   slug: string;
   name: string;
   description: string;
-  category: ProductCategory;
   price: number;
   compare_at_price: number | null;
   stock: number;
   images: string[];
   whatnot_link: string | null;
+  categories: { id: string; slug: string; label: string } | null;
 };
 
 function mapRow(row: ProductRow): Product {
@@ -36,7 +36,9 @@ function mapRow(row: ProductRow): Product {
     slug: row.slug,
     name: row.name,
     description: row.description,
-    category: row.category,
+    categoryId: row.categories?.id ?? "",
+    categorySlug: row.categories?.slug ?? "",
+    categoryLabel: row.categories?.label ?? "Sans catégorie",
     price: Number(row.price),
     compareAtPrice: row.compare_at_price !== null ? Number(row.compare_at_price) : null,
     stock: row.stock,
@@ -46,7 +48,7 @@ function mapRow(row: ProductRow): Product {
 }
 
 export type ProductFilters = {
-  category?: ProductCategory;
+  category?: string;
   search?: string;
   minPrice?: number;
   maxPrice?: number;
@@ -54,10 +56,14 @@ export type ProductFilters = {
 
 export async function getAllProducts(filters: ProductFilters = {}): Promise<Product[]> {
   const supabase = await createClient();
-  let query = supabase.from("products").select("*").order("created_at", { ascending: false });
+  const select = filters.category
+    ? "*, categories!inner(id, slug, label)"
+    : PRODUCT_SELECT;
+
+  let query = supabase.from("products").select(select).order("created_at", { ascending: false });
 
   if (filters.category) {
-    query = query.eq("category", filters.category);
+    query = query.eq("categories.slug", filters.category);
   }
   if (filters.search) {
     query = query.ilike("name", `%${filters.search}%`);
@@ -74,29 +80,29 @@ export async function getAllProducts(filters: ProductFilters = {}): Promise<Prod
     console.error("getAllProducts", error);
     return [];
   }
-  return (data as ProductRow[]).map(mapRow);
+  return (data as unknown as ProductRow[]).map(mapRow);
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("products")
-    .select("*")
+    .select(PRODUCT_SELECT)
     .eq("slug", slug)
     .maybeSingle();
 
   if (error || !data) return null;
-  return mapRow(data as ProductRow);
+  return mapRow(data as unknown as ProductRow);
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("products")
-    .select("*")
+    .select(PRODUCT_SELECT)
     .eq("id", id)
     .maybeSingle();
 
   if (error || !data) return null;
-  return mapRow(data as ProductRow);
+  return mapRow(data as unknown as ProductRow);
 }

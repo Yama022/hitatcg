@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import type { ProductCategory } from "@/lib/products";
 
 export async function logout() {
   const supabase = await createClient();
@@ -49,10 +48,39 @@ function readProductForm(formData: FormData) {
   return {
     name: (formData.get("name") as string).trim(),
     description: (formData.get("description") as string ?? "").trim(),
-    category: formData.get("category") as ProductCategory,
+    category_id: formData.get("category_id") as string,
     price: Number(formData.get("price")),
     stock: Number(formData.get("stock")),
   };
+}
+
+export async function createCategory(formData: FormData) {
+  const supabase = await createClient();
+  const label = (formData.get("label") as string).trim();
+  const slug = slugify(label);
+
+  if (!label || !slug) return;
+
+  const { error } = await supabase.from("categories").insert({ slug, label });
+  if (error) {
+    redirect(`/admin/categories?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/admin/categories");
+  revalidatePath("/catalogue");
+  redirect("/admin/categories");
+}
+
+export async function deleteCategory(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("categories").delete().eq("id", id);
+
+  if (error) {
+    redirect(`/admin/categories?error=${encodeURIComponent("Catégorie utilisée par des produits, impossible de supprimer.")}`);
+  }
+
+  revalidatePath("/admin/categories");
+  revalidatePath("/catalogue");
 }
 
 export async function createProduct(formData: FormData) {

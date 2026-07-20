@@ -1,11 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Product, categoryLabels } from "@/lib/products";
+import { Product } from "@/lib/products";
 
-const categoryGradients: Record<Product["category"], string> = {
-  carte: "from-gold to-amber-500",
-  "objet-3d": "from-sakura to-sakura-deep",
-};
+const gradients = [
+  "from-gold to-amber-500",
+  "from-sakura to-sakura-deep",
+  "from-ink-soft to-ink",
+  "from-sky-300 to-sky-500",
+  "from-emerald-300 to-emerald-500",
+];
+
+function gradientForCategory(categorySlug: string): string {
+  let hash = 0;
+  for (let i = 0; i < categorySlug.length; i++) {
+    hash = (hash * 31 + categorySlug.charCodeAt(i)) >>> 0;
+  }
+  return gradients[hash % gradients.length];
+}
 
 export function ProductCard({ product }: { product: Product }) {
   const outOfStock = product.stock === 0;
@@ -17,7 +28,7 @@ export function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white/60 transition-shadow hover:shadow-lg"
     >
       <div
-        className={`relative aspect-[3/4] bg-gradient-to-br ${categoryGradients[product.category]}`}
+        className={`relative aspect-[3/4] bg-gradient-to-br ${gradientForCategory(product.categorySlug)}`}
       >
         {image && (
           <Image
@@ -29,7 +40,7 @@ export function ProductCard({ product }: { product: Product }) {
           />
         )}
         <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-cream">
-          {categoryLabels[product.category]}
+          {product.categoryLabel}
         </span>
         {outOfStock && (
           <span className="absolute right-3 top-3 rounded-full bg-ink px-2 py-1 text-[10px] font-semibold text-cream">

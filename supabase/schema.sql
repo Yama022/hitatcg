@@ -1,11 +1,38 @@
--- À exécuter dans Supabase → SQL Editor.
+-- À exécuter dans Supabase → SQL Editor (nouveau projet uniquement).
+-- Si tu as déjà exécuté une ancienne version de ce fichier, utilise
+-- migration-categories.sql à la place pour passer à ce schéma.
+
+create table if not exists categories (
+  id uuid primary key default gen_random_uuid(),
+  slug text unique not null,
+  label text not null,
+  created_at timestamptz not null default now()
+);
+
+alter table categories enable row level security;
+
+create policy "Public can read categories"
+  on categories for select
+  to anon, authenticated
+  using (true);
+
+create policy "Authenticated can manage categories"
+  on categories for all
+  to authenticated
+  using (true)
+  with check (true);
+
+insert into categories (slug, label) values
+  ('carte', 'Carte gradée'),
+  ('objet-3d', 'Impression 3D')
+on conflict (slug) do nothing;
 
 create table if not exists products (
   id uuid primary key default gen_random_uuid(),
   slug text unique not null,
   name text not null,
   description text not null default '',
-  category text not null check (category in ('carte', 'objet-3d')),
+  category_id uuid not null references categories(id),
   price numeric(10,2) not null,
   compare_at_price numeric(10,2),
   stock integer not null default 0,
@@ -15,7 +42,7 @@ create table if not exists products (
   updated_at timestamptz not null default now()
 );
 
-create index if not exists products_category_idx on products (category);
+create index if not exists products_category_id_idx on products (category_id);
 create index if not exists products_price_idx on products (price);
 
 alter table products enable row level security;
@@ -54,7 +81,7 @@ create trigger products_set_updated_at
   for each row execute function set_updated_at();
 
 -- Storage : crée d'abord un bucket "product-images" (Storage → New bucket,
--- coche "Public bucket"), puis exécute ces policies.
+-- coche "Public bucket", ou exécute create-bucket.sql), puis ces policies.
 
 create policy "Public read product images"
   on storage.objects for select

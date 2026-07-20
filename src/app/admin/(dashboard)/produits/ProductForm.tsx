@@ -3,15 +3,16 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { Product } from "@/lib/products";
-import { categoryLabels } from "@/lib/product-categories";
+import type { Category } from "@/lib/categories";
 
 type ProductFormProps = {
   action: (formData: FormData) => void;
   product?: Product;
+  categories: Category[];
   errorMessage?: string | null;
 };
 
-export function ProductForm({ action, product, errorMessage }: ProductFormProps) {
+export function ProductForm({ action, product, categories, errorMessage }: ProductFormProps) {
   const [existingImages, setExistingImages] = useState(product?.images ?? []);
 
   return (
@@ -51,22 +52,29 @@ export function ProductForm({ action, product, errorMessage }: ProductFormProps)
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="category" className="text-sm font-medium text-ink">
+          <label htmlFor="category_id" className="text-sm font-medium text-ink">
             Catégorie
           </label>
           <select
-            id="category"
-            name="category"
+            id="category_id"
+            name="category_id"
             required
-            defaultValue={product?.category ?? "carte"}
+            defaultValue={product?.categoryId ?? categories[0]?.id ?? ""}
             className="mt-1 w-full rounded-lg border border-ink/20 bg-white px-3 py-2 text-sm outline-none focus:border-sakura"
           >
-            {Object.entries(categoryLabels).map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.label}
               </option>
             ))}
           </select>
+          <a
+            href="/admin/categories"
+            target="_blank"
+            className="mt-1 inline-block text-xs text-sakura-deep hover:underline"
+          >
+            + Gérer les catégories
+          </a>
         </div>
         <div>
           <label htmlFor="stock" className="text-sm font-medium text-ink">
