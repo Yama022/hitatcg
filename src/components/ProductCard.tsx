@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/lib/products";
+import { Product, categoryLabels } from "@/lib/products";
 
 const categoryGradients: Record<Product["category"], string> = {
   carte: "from-gold to-amber-500",
@@ -9,6 +9,7 @@ const categoryGradients: Record<Product["category"], string> = {
 
 export function ProductCard({ product }: { product: Product }) {
   const outOfStock = product.stock === 0;
+  const image = product.images[0];
 
   return (
     <Link
@@ -18,9 +19,9 @@ export function ProductCard({ product }: { product: Product }) {
       <div
         className={`relative aspect-[3/4] bg-gradient-to-br ${categoryGradients[product.category]}`}
       >
-        {product.image && (
+        {image && (
           <Image
-            src={product.image}
+            src={image}
             alt={product.name}
             fill
             sizes="(min-width: 1024px) 22vw, (min-width: 640px) 33vw, 50vw"
@@ -28,7 +29,7 @@ export function ProductCard({ product }: { product: Product }) {
           />
         )}
         <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-cream">
-          {product.badge}
+          {categoryLabels[product.category]}
         </span>
         {outOfStock && (
           <span className="absolute right-3 top-3 rounded-full bg-ink px-2 py-1 text-[10px] font-semibold text-cream">
@@ -37,7 +38,6 @@ export function ProductCard({ product }: { product: Product }) {
         )}
       </div>
       <div className="flex flex-1 flex-col gap-1 p-4">
-        <p className="text-xs text-ink-soft">{product.subtitle}</p>
         <h3 className="font-display text-lg font-semibold text-ink group-hover:underline">
           {product.name}
         </h3>

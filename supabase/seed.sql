@@ -1,0 +1,23 @@
+-- À exécuter après schema.sql. Reprend le catalogue actuel (18 produits).
+-- Les images pointent vers /public/products/, déjà déployées avec le site.
+
+insert into products (slug, name, description, category, price, stock, images, whatnot_link) values
+('luffy-op09-119-sp-fr-cgc10', 'Luffy OP09-119 SP FR CCC 10', 'Carte One Piece Card Game OP09-119, gradée CCC 10. Pièce unique.', 'carte', 400.00, 1, array['/products/1.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTkwMzYyODg3OA=='),
+('sanji-op12-060-event-manga-fr-cgc10', 'Sanji OP12-060 Event Manga FR CCC 10', 'Carte Event Manga FR OP12-060, gradée CCC 10. Pièce unique.', 'carte', 200.00, 1, array['/products/2.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTkwMzYyNzg0Mw=='),
+('sanji-st13-004-sp-fr-cgc10', 'Sanji ST13-004 SP FR CCC 10', 'Carte One Piece Card Game ST13-004, gradée CCC 10. Pièce unique.', 'carte', 220.00, 1, array['/products/3.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTkwMzYyNjkwOQ=='),
+('magnet-ace-3d-v2', 'Magnet Ace 3D V2', 'Magnet Ace imprimé en 3D à l''atelier, version 2.', 'objet-3d', 3.00, 9, array['/products/4.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTg5MzM1NDk2Mw=='),
+('magnet-shanks-3d-v2', 'Magnet Shanks 3D V2', 'Magnet Shanks imprimé en 3D à l''atelier, version 2.', 'objet-3d', 2.00, 15, array['/products/5.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTg5MzM0ODk0OA=='),
+('magnet-law-3d', 'Magnet Law 3D', 'Magnet Trafalgar Law imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 14, array['/products/6.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTg5MzM0NzU0Mw=='),
+('magnet-boa-3d', 'Magnet Boa 3D', 'Magnet Boa Hancock imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 14, array['/products/7.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTg5MzM0NjIxMg=='),
+('magnet-yamato-3d', 'Magnet Yamato 3D', 'Magnet Yamato imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 8, array['/products/8.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTg5MzM0NDU1MA=='),
+('magnet-jetons-ace-3d', 'Magnet jetons Ace 3D', 'Magnet jetons Ace imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 15, array['/products/9.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTg5MzM0MzAyOQ=='),
+('magnet-luffy-nika-3d', 'Magnet Luffy NIKA 3D', 'Magnet Luffy NIKA (Gear 5) imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 10, array['/products/10.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTg5MzM0MTc1Mw=='),
+('magnet-nami-3d', 'Magnet Nami 3D', 'Magnet Nami imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 10, array['/products/11.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTg1MTExNzU5MQ=='),
+('magnet-gol-d-roger-3d', 'Magnet Gol D. Roger 3D', 'Magnet Gol D. Roger imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 4, array['/products/12.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTgwNTE4OTg5NA=='),
+('magnet-ace-3d', 'Magnet Ace 3D', 'Magnet Ace imprimé en 3D à l''atelier.', 'objet-3d', 3.00, 4, array['/products/13.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTgwNTE4NjkxMA=='),
+('magnet-barbe-noire-teach-3d', 'Magnet Barbe Noire (Teach) 3D', 'Magnet Marshall D. Teach (Barbe Noire) imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 4, array['/products/14.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTgwNTE4NTIyMQ=='),
+('magnet-shanks-3d', 'Magnet Shanks 3D', 'Magnet Shanks imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 4, array['/products/15.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTgwNTE4MzAxMA=='),
+('magnet-baggy-3d', 'Magnet Baggy 3D', 'Magnet Baggy imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 3, array['/products/16.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTgwNTE4MTQ2MA=='),
+('magnet-luffy-3d', 'Magnet Luffy 3D', 'Magnet Luffy imprimé en 3D à l''atelier.', 'objet-3d', 2.00, 5, array['/products/17.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTgwNTE3OTkwNg=='),
+('lot-magnet-4-yonko-3d', 'Lot magnet des 4 Yonko 3D', 'Lot de 4 magnets Yonko imprimés en 3D à l''atelier.', 'objet-3d', 7.00, 10, array['/products/18.jpeg'], 'https://www.whatnot.com/fr-FR/listing/TGlzdGluZ05vZGU6MTgwNTE3NTE4Nw==')
+on conflict (slug) do nothing;

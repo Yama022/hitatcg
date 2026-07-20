@@ -25,8 +25,9 @@ const previewReviews = [
   },
 ];
 
-export default function HomePage() {
-  const featured = getAllProducts().slice(0, 3);
+export default async function HomePage() {
+  const allProducts = await getAllProducts();
+  const featured = allProducts.slice(0, 3);
 
   return (
     <div>

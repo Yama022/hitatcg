@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CTAButton } from "@/components/CTAButton";
-import { getAllProducts, getProductBySlug, categoryLabels } from "@/lib/products";
+import { ProductGallery } from "@/components/ProductGallery";
+import { getProductBySlug, categoryLabels } from "@/lib/products";
 import { siteConfig } from "@/lib/config";
-
-export function generateStaticParams() {
-  return getAllProducts().map((product) => ({ slug: product.slug }));
-}
 
 export async function generateMetadata(
   props: PageProps<"/catalogue/[slug]">
 ): Promise<Metadata> {
   const { slug } = await props.params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
   return {
     title: `${product.name} — HitaTCG`,
@@ -25,7 +21,7 @@ export default async function ProductPage(
   props: PageProps<"/catalogue/[slug]">
 ) {
   const { slug } = await props.params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -36,31 +32,15 @@ export default async function ProductPage(
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
       <div className="grid gap-10 md:grid-cols-2">
-        <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-ink/10 bg-gradient-to-br from-sakura-pale to-cream-soft">
-          {product.image ? (
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              sizes="(min-width: 768px) 40vw, 90vw"
-              className="object-cover"
-              priority
-            />
-          ) : (
-            <p className="font-display flex h-full items-center justify-center px-6 text-center text-ink-soft">
-              Photo à venir
-            </p>
-          )}
-        </div>
+        <ProductGallery images={product.images} alt={product.name} />
 
         <div>
-          <p className="text-xs text-ink-soft">{product.subtitle}</p>
+          <p className="text-sm font-medium uppercase tracking-wide text-sakura-deep">
+            {categoryLabels[product.category]}
+          </p>
           <h1 className="font-display mt-2 text-3xl font-semibold text-ink">
             {product.name}
           </h1>
-          <p className="mt-2 text-sm font-medium uppercase tracking-wide text-sakura-deep">
-            {categoryLabels[product.category]}
-          </p>
 
           <div className="mt-6 flex items-baseline gap-3">
             <span className="font-display text-3xl font-semibold text-ink">
@@ -80,7 +60,7 @@ export default async function ProductPage(
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <CTAButton href={product.link ?? siteConfig.whatnotUrl} external>
+            <CTAButton href={product.whatnotLink ?? siteConfig.whatnotUrl} external>
               Réserver sur Whatnot
             </CTAButton>
             <CTAButton href="/contact" variant="secondary">

@@ -1,2 +1,3 @@
-Dépose ici les photos de tes cartes, nommées `<slug>.jpg` (le slug est défini dans `src/lib/products.ts`).
-Tant qu'aucune photo n'est présente, le site affiche un visuel placeholder coloré par rareté.
+Photos historiques du catalogue de départ (produits seedés via `supabase/seed.sql`).
+
+Depuis le passage à Supabase, les nouvelles photos produits se gèrent via l'admin (`/admin/produits`) et sont stockées dans le bucket Supabase Storage `product-images`, pas ici.

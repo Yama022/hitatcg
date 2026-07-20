@@ -1,14 +1,33 @@
 import type { Metadata } from "next";
 import { ProductCard } from "@/components/ProductCard";
-import { getAllProducts } from "@/lib/products";
+import { CatalogueFilters } from "@/components/CatalogueFilters";
+import { getAllProducts, type ProductCategory } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Catalogue — HitaTCG",
   description: "Cartes gradées et objets 3D One Piece disponibles à la vente chez HITATCG.",
 };
 
-export default function CataloguePage() {
-  const products = getAllProducts();
+export default async function CataloguePage(
+  props: PageProps<"/catalogue">
+) {
+  const searchParams = await props.searchParams;
+
+  const search = typeof searchParams.q === "string" ? searchParams.q : undefined;
+  const category =
+    typeof searchParams.category === "string" && searchParams.category
+      ? (searchParams.category as ProductCategory)
+      : undefined;
+  const minPrice =
+    typeof searchParams.minPrice === "string" && searchParams.minPrice
+      ? Number(searchParams.minPrice)
+      : undefined;
+  const maxPrice =
+    typeof searchParams.maxPrice === "string" && searchParams.maxPrice
+      ? Number(searchParams.maxPrice)
+      : undefined;
+
+  const products = await getAllProducts({ search, category, minPrice, maxPrice });
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
@@ -18,11 +37,21 @@ export default function CataloguePage() {
         jour régulièrement — les pièces les plus rares partent vite en live.
       </p>
 
-      <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
-          <ProductCard key={product.slug} product={product} />
-        ))}
+      <div className="mt-8">
+        <CatalogueFilters />
       </div>
+
+      {products.length === 0 ? (
+        <p className="mt-10 text-sm text-ink-soft">
+          Aucun produit ne correspond à ces filtres.
+        </p>
+      ) : (
+        <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+          {products.map((product) => (
+            <ProductCard key={product.slug} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
