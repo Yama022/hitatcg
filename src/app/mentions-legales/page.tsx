@@ -19,9 +19,10 @@ export default function MentionsLegalesPage() {
             Éditeur du site
           </h2>
           <p className="mt-2">
-            Le site {siteConfig.name} (accessible à l&apos;adresse hitatcg.com)
-            est édité par Rémi Jacquemin, entrepreneur individuel (micro-entreprise),
-            exerçant sous le nom commercial &laquo; HitaTCG &raquo;.
+            Le site {siteConfig.name}{" "}
+            (accessible à l&apos;adresse hitatcg.com) est édité par Rémi
+            Jacquemin, entrepreneur individuel (micro-entreprise), exerçant
+            sous le nom commercial &laquo; HitaTCG &raquo;.
           </p>
           <ul className="mt-2 list-inside list-disc space-y-1">
             <li>SIRET : 849 203 849 00021</li>

@@ -45,9 +45,10 @@ export default function ReviewsPage() {
         Avis clients
       </h1>
       <p className="mt-2 max-w-2xl text-sm text-ink-soft">
-        {siteConfig.stats.reviews} avis 5 étoiles récoltés sur Whatnot. Ci-dessous
-        un échantillon — l&apos;historique complet est consultable directement
-        sur notre profil.
+        {siteConfig.stats.reviews}{" "}
+        avis 5 étoiles récoltés sur Whatnot. Ci-dessous un échantillon —
+        l&apos;historique complet est consultable directement sur notre
+        profil.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

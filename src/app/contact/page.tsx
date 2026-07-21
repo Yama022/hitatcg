@@ -56,7 +56,7 @@ export default function ContactPage() {
           Grossistes &amp; partenaires
         </h2>
         <p className="mt-2 text-sm text-ink-soft">
-          Nous disposons d&apos;un historique vérifiable de plus de{" "}
+          Nous disposons d&apos;un historique vérifiable de{" "}
           {siteConfig.stats.sales} ventes et {siteConfig.stats.reviews} avis 5
           étoiles sur Whatnot. Contactez-nous par email pour toute demande de
           partenariat fournisseur.
