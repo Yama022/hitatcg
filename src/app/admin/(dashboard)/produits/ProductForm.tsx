@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import type { Product } from "@/lib/products";
 import type { Category } from "@/lib/categories";
+import { FormInput, FormTextarea, fieldClassName } from "@/components/FormInput";
+import { Button } from "@/components/Button";
 
 type ProductFormProps = {
   action: (formData: FormData) => void;
@@ -23,32 +25,22 @@ export function ProductForm({ action, product, categories, errorMessage }: Produ
         </p>
       )}
 
-      <div>
-        <label htmlFor="name" className="text-sm font-medium text-ink">
-          Nom du produit
-        </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          required
-          defaultValue={product?.name}
-          className="mt-1 w-full rounded-lg border border-ink/20 px-3 py-2 text-sm outline-none focus:border-sakura"
-        />
-      </div>
+      <FormInput
+        id="name"
+        name="name"
+        type="text"
+        label="Nom du produit"
+        required
+        defaultValue={product?.name}
+      />
 
-      <div>
-        <label htmlFor="description" className="text-sm font-medium text-ink">
-          Description
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          rows={4}
-          defaultValue={product?.description}
-          className="mt-1 w-full rounded-lg border border-ink/20 px-3 py-2 text-sm outline-none focus:border-sakura"
-        />
-      </div>
+      <FormTextarea
+        id="description"
+        name="description"
+        label="Description"
+        rows={4}
+        defaultValue={product?.description}
+      />
 
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -60,7 +52,7 @@ export function ProductForm({ action, product, categories, errorMessage }: Produ
             name="category_id"
             required
             defaultValue={product?.categoryId ?? categories[0]?.id ?? ""}
-            className="mt-1 w-full rounded-lg border border-ink/20 bg-white px-3 py-2 text-sm outline-none focus:border-sakura"
+            className={`mt-1 w-full bg-white ${fieldClassName}`}
           >
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -76,38 +68,29 @@ export function ProductForm({ action, product, categories, errorMessage }: Produ
             + Gérer les catégories
           </a>
         </div>
-        <div>
-          <label htmlFor="stock" className="text-sm font-medium text-ink">
-            Quantité en stock
-          </label>
-          <input
-            id="stock"
-            name="stock"
-            type="number"
-            min={0}
-            step={1}
-            required
-            defaultValue={product?.stock ?? 0}
-            className="mt-1 w-full rounded-lg border border-ink/20 px-3 py-2 text-sm outline-none focus:border-sakura"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="price" className="text-sm font-medium text-ink">
-          Prix (€)
-        </label>
-        <input
-          id="price"
-          name="price"
+        <FormInput
+          id="stock"
+          name="stock"
           type="number"
+          label="Quantité en stock"
           min={0}
-          step={0.01}
+          step={1}
           required
-          defaultValue={product?.price}
-          className="mt-1 w-full max-w-xs rounded-lg border border-ink/20 px-3 py-2 text-sm outline-none focus:border-sakura"
+          defaultValue={product?.stock ?? 0}
         />
       </div>
+
+      <FormInput
+        id="price"
+        name="price"
+        type="number"
+        label="Prix (€)"
+        min={0}
+        step={0.01}
+        required
+        defaultValue={product?.price}
+        className="max-w-xs"
+      />
 
       {existingImages.length > 0 && (
         <div>
@@ -153,12 +136,9 @@ export function ProductForm({ action, product, categories, errorMessage }: Produ
       </div>
 
       <div className="flex gap-3 pt-2">
-        <button
-          type="submit"
-          className="rounded-lg bg-ink px-5 py-2 text-sm font-semibold text-cream transition-colors hover:bg-ink-soft"
-        >
+        <Button type="submit">
           {product ? "Enregistrer" : "Créer le produit"}
-        </button>
+        </Button>
       </div>
     </form>
   );

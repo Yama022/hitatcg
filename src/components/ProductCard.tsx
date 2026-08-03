@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/products";
+import { formatPrice } from "@/lib/format";
+import { cardSurface } from "@/lib/ui";
 
 const gradients = [
   "from-gold to-amber-500",
@@ -25,7 +27,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/catalogue/${product.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white/60 transition-shadow hover:shadow-lg"
+      className={`group flex flex-col overflow-hidden bg-white/60 transition-shadow hover:shadow-lg ${cardSurface}`}
     >
       <div
         className={`relative aspect-[3/4] bg-gradient-to-br ${gradientForCategory(product.categorySlug)}`}
@@ -54,11 +56,11 @@ export function ProductCard({ product }: { product: Product }) {
         </h3>
         <div className="mt-auto flex items-baseline gap-2 pt-2">
           <span className="font-mono text-lg font-semibold text-ink">
-            {product.price.toFixed(2)} €
+            {formatPrice(product.price)}
           </span>
           {product.compareAtPrice && (
             <span className="font-mono text-sm text-ink-soft line-through">
-              {product.compareAtPrice.toFixed(2)} €
+              {formatPrice(product.compareAtPrice)}
             </span>
           )}
         </div>

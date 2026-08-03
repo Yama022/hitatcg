@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { getAllCategories } from "@/lib/categories";
+import { fieldClassName } from "@/components/FormInput";
+import { Button } from "@/components/Button";
+import { cardSurface } from "@/lib/ui";
 import { createCategory, deleteCategory } from "../actions";
 
 export const metadata: Metadata = {
@@ -36,17 +39,12 @@ export default async function AdminCategoriesPage(
           type="text"
           placeholder="Nom de la catégorie (ex : Booster)"
           required
-          className="flex-1 rounded-lg border border-ink/20 px-3 py-2 text-sm outline-none focus:border-sakura"
+          className={`flex-1 ${fieldClassName}`}
         />
-        <button
-          type="submit"
-          className="rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-cream hover:bg-ink-soft"
-        >
-          Ajouter
-        </button>
+        <Button type="submit">Ajouter</Button>
       </form>
 
-      <ul className="mt-8 divide-y divide-ink/10 rounded-2xl border border-ink/10 bg-white">
+      <ul className={`mt-8 divide-y divide-ink/10 bg-white ${cardSurface}`}>
         {categories.map((cat) => (
           <li key={cat.id} className="flex items-center justify-between px-4 py-3">
             <span className="text-sm text-ink">{cat.label}</span>

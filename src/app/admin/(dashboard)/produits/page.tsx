@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllProducts } from "@/lib/products";
+import { formatPrice } from "@/lib/format";
+import { CTAButton } from "@/components/CTAButton";
+import { cardSurface } from "@/lib/ui";
 import { deleteProduct } from "../actions";
 
 export const metadata: Metadata = {
@@ -9,22 +12,29 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function AdminProductsPage() {
+export default async function AdminProductsPage(
+  props: PageProps<"/admin/produits">
+) {
+  const searchParams = await props.searchParams;
+  const warningMessage =
+    typeof searchParams.warning === "string" ? searchParams.warning : null;
+
   const products = await getAllProducts();
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <h1 className="font-display text-2xl font-semibold text-ink">Produits</h1>
-        <Link
-          href="/admin/produits/nouveau"
-          className="rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-cream hover:bg-ink-soft"
-        >
-          + Nouveau produit
-        </Link>
+        <CTAButton href="/admin/produits/nouveau">+ Nouveau produit</CTAButton>
       </div>
 
-      <div className="mt-8 overflow-x-auto rounded-2xl border border-ink/10 bg-white">
+      {warningMessage && (
+        <p className="mt-4 rounded-lg bg-sakura-pale px-3 py-2 text-sm text-sakura-deep">
+          {warningMessage}
+        </p>
+      )}
+
+      <div className={`mt-8 overflow-x-auto bg-white ${cardSurface}`}>
         <table className="w-full text-left text-sm">
           <thead className="label-tag border-b border-ink/10 text-ink-faint">
             <tr>
@@ -58,7 +68,7 @@ export default async function AdminProductsPage() {
                 <td className="px-4 py-3 text-ink-soft">
                   {product.categoryLabel}
                 </td>
-                <td className="px-4 py-3 font-mono text-ink-soft">{product.price.toFixed(2)} €</td>
+                <td className="px-4 py-3 font-mono text-ink-soft">{formatPrice(product.price)}</td>
                 <td className="px-4 py-3 font-mono text-ink-soft">{product.stock}</td>
                 <td className="px-4 py-3 text-right">
                   <div className="flex justify-end gap-3">

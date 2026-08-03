@@ -1,4 +1,5 @@
 import { siteConfig } from "@/lib/config";
+import { cardSurface } from "@/lib/ui";
 
 const items = [
   { label: "Abonnés Whatnot", value: siteConfig.stats.followers },
@@ -9,7 +10,7 @@ const items = [
 
 export function StatsStrip() {
   return (
-    <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-ink/10 bg-white sm:grid-cols-4">
+    <div className={`grid grid-cols-2 overflow-hidden bg-white sm:grid-cols-4 ${cardSurface}`}>
       {items.map((item, i) => {
         const noBorderRMobile = (i + 1) % 2 === 0;
         const noBorderRDesktop = (i + 1) % 4 === 0;

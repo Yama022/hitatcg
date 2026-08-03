@@ -1,13 +1,14 @@
 import { Logo } from "@/components/Logo";
 import { CTAButton } from "@/components/CTAButton";
 import { siteConfig } from "@/lib/config";
+import { cardSurface } from "@/lib/ui";
 
 export function WhatnotProfileCard() {
   const { whatnotProfile, stats } = siteConfig;
 
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-ink/10 p-8"
+      className={`relative overflow-hidden p-8 ${cardSurface}`}
       style={{
         background: "linear-gradient(155deg, var(--bg2), var(--bg3))",
       }}

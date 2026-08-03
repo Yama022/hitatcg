@@ -4,6 +4,7 @@ import { CTAButton } from "@/components/CTAButton";
 import { ProductGallery } from "@/components/ProductGallery";
 import { getProductBySlug } from "@/lib/products";
 import { siteConfig } from "@/lib/config";
+import { formatPrice } from "@/lib/format";
 
 export async function generateMetadata(
   props: PageProps<"/catalogue/[slug]">
@@ -42,11 +43,11 @@ export default async function ProductPage(
 
           <div className="mt-6 flex items-baseline gap-3">
             <span className="font-mono text-3xl font-semibold text-ink">
-              {product.price.toFixed(2)} €
+              {formatPrice(product.price)}
             </span>
             {product.compareAtPrice && (
               <span className="font-mono text-base text-ink-soft line-through">
-                {product.compareAtPrice.toFixed(2)} €
+                {formatPrice(product.compareAtPrice)}
               </span>
             )}
           </div>

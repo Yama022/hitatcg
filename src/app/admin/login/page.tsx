@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Logo } from "@/components/Logo";
+import { FormInput } from "@/components/FormInput";
+import { Button } from "@/components/Button";
+import { cardSurface } from "@/lib/ui";
 import { login } from "./actions";
 
 export const metadata: Metadata = {
@@ -15,7 +18,7 @@ export default async function AdminLoginPage(
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-cream px-6">
-      <div className="w-full max-w-sm rounded-2xl border border-ink/10 bg-white p-8">
+      <div className={`w-full max-w-sm bg-white p-8 ${cardSurface}`}>
         <div className="flex justify-center">
           <Logo className="h-14 w-14" style={{ width: 56, height: 56 }} />
         </div>
@@ -30,36 +33,17 @@ export default async function AdminLoginPage(
         )}
 
         <form action={login} className="mt-6 space-y-4">
-          <div>
-            <label htmlFor="email" className="text-sm font-medium text-ink">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              className="mt-1 w-full rounded-lg border border-ink/20 px-3 py-2 text-sm outline-none focus:border-sakura"
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="text-sm font-medium text-ink">
-              Mot de passe
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              className="mt-1 w-full rounded-lg border border-ink/20 px-3 py-2 text-sm outline-none focus:border-sakura"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-cream transition-colors hover:bg-ink-soft"
-          >
+          <FormInput id="email" name="email" type="email" label="Email" required />
+          <FormInput
+            id="password"
+            name="password"
+            type="password"
+            label="Mot de passe"
+            required
+          />
+          <Button type="submit" className="w-full">
             Se connecter
-          </button>
+          </Button>
         </form>
       </div>
     </div>

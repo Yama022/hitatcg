@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CTAButton } from "@/components/CTAButton";
 import { siteConfig } from "@/lib/config";
+import { cardSurface } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Contact — HitaTCG",
@@ -41,7 +42,7 @@ export default function ContactPage() {
             href={channel.href}
             target={channel.href.startsWith("http") ? "_blank" : undefined}
             rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="rounded-2xl border border-ink/10 bg-white/60 p-6 transition-shadow hover:shadow-lg"
+            className={`bg-white/60 p-6 transition-shadow hover:shadow-lg ${cardSurface}`}
           >
             <p className="text-sm font-semibold uppercase tracking-wide text-sakura-deep">
               {channel.label}
@@ -51,7 +52,7 @@ export default function ContactPage() {
         ))}
       </div>
 
-      <div className="mt-12 rounded-2xl border border-ink/10 bg-cream-soft p-6">
+      <div className={`mt-12 bg-cream-soft p-6 ${cardSurface}`}>
         <h2 className="font-display text-lg font-semibold text-ink">
           Grossistes &amp; partenaires
         </h2>

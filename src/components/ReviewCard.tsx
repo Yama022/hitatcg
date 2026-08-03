@@ -1,3 +1,5 @@
+import { cardSurface } from "@/lib/ui";
+
 export type Review = {
   author: string;
   quote: string;
@@ -5,7 +7,7 @@ export type Review = {
 
 export function ReviewCard({ review }: { review: Review }) {
   return (
-    <figure className="flex flex-col gap-3 rounded-2xl border border-ink/10 bg-white/60 p-6">
+    <figure className={`flex flex-col gap-3 bg-white/60 p-6 ${cardSurface}`}>
       <div className="text-gold" aria-hidden>
         ★★★★★
       </div>
