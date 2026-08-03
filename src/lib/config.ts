@@ -8,9 +8,9 @@ export const siteConfig = {
   contactEmail: "contact@hitatcg.com",
   instagramUrl: "https://www.instagram.com/hitatcg",
   stats: {
-    followers: "1,5K+",
-    sales: "1,4K+",
-    reviews: "300+",
+    followers: "1,7K+",
+    sales: "1,7K+",
+    reviews: "340+",
     rating: "5,0",
   },
   whatnotProfile: {

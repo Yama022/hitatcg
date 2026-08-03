@@ -9,17 +9,30 @@ const items = [
 
 export function StatsStrip() {
   return (
-    <div className="grid grid-cols-2 gap-6 border-y border-ink/10 py-8 sm:grid-cols-4">
-      {items.map((item) => (
-        <div key={item.label} className="text-center">
-          <p className="font-display text-3xl font-semibold text-ink sm:text-4xl">
-            {item.value}
-          </p>
-          <p className="mt-1 text-xs uppercase tracking-wide text-ink-soft">
-            {item.label}
-          </p>
-        </div>
-      ))}
+    <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-ink/10 bg-white sm:grid-cols-4">
+      {items.map((item, i) => {
+        const noBorderRMobile = (i + 1) % 2 === 0;
+        const noBorderRDesktop = (i + 1) % 4 === 0;
+        const noBorderBMobile = i >= items.length - 2;
+
+        return (
+          <div
+            key={item.label}
+            className={[
+              "border-ink/10 p-6 text-center",
+              noBorderRMobile ? "" : "border-r",
+              noBorderRDesktop ? "sm:border-r-0" : "sm:border-r",
+              noBorderBMobile ? "" : "border-b",
+              "sm:border-b-0",
+            ].join(" ")}
+          >
+            <p className="font-mono text-3xl font-semibold text-ink sm:text-4xl">
+              {item.value}
+            </p>
+            <p className="label-tag mt-1 text-ink-faint">{item.label}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }

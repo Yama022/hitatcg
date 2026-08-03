@@ -148,14 +148,14 @@ export function ProductForm({ action, product, categories, errorMessage }: Produ
           type="file"
           accept="image/*"
           multiple
-          className="mt-1 w-full text-sm text-ink-soft file:mr-3 file:rounded-full file:border-0 file:bg-ink file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-cream"
+          className="mt-1 w-full text-sm text-ink-soft file:mr-3 file:rounded-lg file:border-0 file:bg-ink file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-cream"
         />
       </div>
 
       <div className="flex gap-3 pt-2">
         <button
           type="submit"
-          className="rounded-full bg-ink px-5 py-2 text-sm font-semibold text-cream transition-colors hover:bg-ink-soft"
+          className="rounded-lg bg-ink px-5 py-2 text-sm font-semibold text-cream transition-colors hover:bg-ink-soft"
         >
           {product ? "Enregistrer" : "Créer le produit"}
         </button>

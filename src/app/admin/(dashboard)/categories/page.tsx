@@ -40,7 +40,7 @@ export default async function AdminCategoriesPage(
         />
         <button
           type="submit"
-          className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-cream hover:bg-ink-soft"
+          className="rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-cream hover:bg-ink-soft"
         >
           Ajouter
         </button>

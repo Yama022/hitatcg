@@ -1,14 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  --color-cream: #f7f4ee;
-  --color-cream-soft: #efe9dc;
-  --color-ink: #171614;
-  --color-ink-soft: #7d7a72;
-  --color-sakura: #ef7288;
-  --color-sakura-deep: #c1425c;
-  --color-sakura-pale: #f7f4ee;
-  --color-gold: #bd9a4c;
+  /* ledger premium — semantic tokens */
+  --acc: #d9748a;
+  --acc2: #ef7288;
+  --gr: #4a9d6e;
+  --re: #c0392b;
+  --am: #bd9a4c;
+
+  --tx: #171614;
+  --tx2: rgba(23, 22, 20, 0.64);
+  --tx3: rgba(23, 22, 20, 0.4);
+
+  --bg: #f7f4ee;
+  --bg2: #ffffff;
+  --bg3: #efe9dc;
+
+  --line: rgba(23, 22, 20, 0.08);
+  --line2: rgba(23, 22, 20, 0.16);
+
+  /* aliases kept for existing component classNames */
+  --color-cream: var(--bg);
+  --color-cream-soft: var(--bg3);
+  --color-ink: var(--tx);
+  --color-ink-soft: var(--tx2);
+  --color-ink-faint: var(--tx3);
+  --color-sakura: var(--acc2);
+  --color-sakura-deep: var(--re);
+  --color-sakura-pale: var(--bg);
+  --color-gold: var(--am);
 }
 
 @theme inline {
@@ -16,20 +36,28 @@
   --color-cream-soft: var(--color-cream-soft);
   --color-ink: var(--color-ink);
   --color-ink-soft: var(--color-ink-soft);
+  --color-ink-faint: var(--color-ink-faint);
   --color-sakura: var(--color-sakura);
   --color-sakura-deep: var(--color-sakura-deep);
   --color-sakura-pale: var(--color-sakura-pale);
   --color-gold: var(--color-gold);
-  --font-serif-jp: var(--font-shippori-mincho);
-  --font-sans: var(--font-inter);
+  --font-serif-jp: var(--font-instrument-serif);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--color-cream);
-  color: var(--color-ink);
+  background: var(--bg);
+  color: var(--tx);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
 .font-display {
   font-family: var(--font-serif-jp), serif;
+}
+
+.label-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }

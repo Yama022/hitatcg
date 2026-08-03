@@ -35,19 +35,17 @@ export default async function ProductPage(
         <ProductGallery images={product.images} alt={product.name} />
 
         <div>
-          <p className="text-sm font-medium uppercase tracking-wide text-sakura-deep">
-            {product.categoryLabel}
-          </p>
+          <p className="label-tag text-sakura-deep">{product.categoryLabel}</p>
           <h1 className="font-display mt-2 text-3xl font-semibold text-ink">
             {product.name}
           </h1>
 
           <div className="mt-6 flex items-baseline gap-3">
-            <span className="font-display text-3xl font-semibold text-ink">
+            <span className="font-mono text-3xl font-semibold text-ink">
               {product.price.toFixed(2)} €
             </span>
             {product.compareAtPrice && (
-              <span className="text-base text-ink-soft line-through">
+              <span className="font-mono text-base text-ink-soft line-through">
                 {product.compareAtPrice.toFixed(2)} €
               </span>
             )}
@@ -56,7 +54,13 @@ export default async function ProductPage(
           <p className="mt-6 text-sm text-ink-soft">{product.description}</p>
 
           <p className="mt-4 text-sm text-ink">
-            {outOfStock ? "Épuisé pour le moment" : `${product.stock} en stock`}
+            {outOfStock ? (
+              "Épuisé pour le moment"
+            ) : (
+              <>
+                <span className="font-mono">{product.stock}</span> en stock
+              </>
+            )}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">

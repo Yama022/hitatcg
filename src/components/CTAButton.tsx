@@ -14,7 +14,7 @@ export function CTAButton({
   external = false,
 }: CTAButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors";
+    "inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-colors";
   const styles =
     variant === "primary"
       ? "bg-ink text-cream hover:bg-ink-soft"

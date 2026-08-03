@@ -39,11 +39,11 @@ export function ProductCard({ product }: { product: Product }) {
             className="object-cover"
           />
         )}
-        <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-cream">
+        <span className="absolute left-3 top-3 rounded-md bg-ink/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-cream">
           {product.categoryLabel}
         </span>
         {outOfStock && (
-          <span className="absolute right-3 top-3 rounded-full bg-ink px-2 py-1 text-[10px] font-semibold text-cream">
+          <span className="absolute right-3 top-3 rounded-md bg-ink px-2 py-1 text-[10px] font-semibold text-cream">
             Épuisé
           </span>
         )}
@@ -53,11 +53,11 @@ export function ProductCard({ product }: { product: Product }) {
           {product.name}
         </h3>
         <div className="mt-auto flex items-baseline gap-2 pt-2">
-          <span className="text-lg font-semibold text-ink">
+          <span className="font-mono text-lg font-semibold text-ink">
             {product.price.toFixed(2)} €
           </span>
           {product.compareAtPrice && (
-            <span className="text-sm text-ink-soft line-through">
+            <span className="font-mono text-sm text-ink-soft line-through">
               {product.compareAtPrice.toFixed(2)} €
             </span>
           )}

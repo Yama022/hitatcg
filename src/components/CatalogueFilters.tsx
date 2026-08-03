@@ -11,6 +11,7 @@ export function CatalogueFilters({ categories }: { categories: Category[] }) {
   const [isPending, startTransition] = useTransition();
 
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
+  const activeCategory = searchParams.get("category") ?? "";
 
   function updateParam(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
@@ -27,7 +28,7 @@ export function CatalogueFilters({ categories }: { categories: Category[] }) {
   return (
     <div className="flex flex-wrap items-end gap-4">
       <div>
-        <label htmlFor="q" className="text-xs font-medium uppercase tracking-wide text-ink-soft">
+        <label htmlFor="q" className="label-tag text-ink-faint">
           Nom
         </label>
         <input
@@ -43,26 +44,38 @@ export function CatalogueFilters({ categories }: { categories: Category[] }) {
       </div>
 
       <div>
-        <label htmlFor="category" className="text-xs font-medium uppercase tracking-wide text-ink-soft">
-          Catégorie
-        </label>
-        <select
-          id="category"
-          defaultValue={searchParams.get("category") ?? ""}
-          onChange={(e) => updateParam("category", e.target.value)}
-          className="mt-1 block w-40 rounded-lg border border-ink/20 bg-white px-3 py-2 text-sm outline-none focus:border-sakura"
-        >
-          <option value="">Toutes</option>
+        <p className="label-tag text-ink-faint">Catégorie</p>
+        <div className="mt-1 flex flex-wrap gap-1 rounded-lg bg-cream-soft p-1">
+          <button
+            type="button"
+            onClick={() => updateParam("category", "")}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              activeCategory === ""
+                ? "bg-ink text-cream"
+                : "text-ink-soft hover:text-ink"
+            }`}
+          >
+            Toutes
+          </button>
           {categories.map((cat) => (
-            <option key={cat.id} value={cat.slug}>
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => updateParam("category", cat.slug)}
+              className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                activeCategory === cat.slug
+                  ? "bg-ink text-cream"
+                  : "text-ink-soft hover:text-ink"
+              }`}
+            >
               {cat.label}
-            </option>
+            </button>
           ))}
-        </select>
+        </div>
       </div>
 
       <div>
-        <label htmlFor="minPrice" className="text-xs font-medium uppercase tracking-wide text-ink-soft">
+        <label htmlFor="minPrice" className="label-tag text-ink-faint">
           Prix min
         </label>
         <input
@@ -71,12 +84,12 @@ export function CatalogueFilters({ categories }: { categories: Category[] }) {
           min={0}
           defaultValue={searchParams.get("minPrice") ?? ""}
           onBlur={(e) => updateParam("minPrice", e.target.value)}
-          className="mt-1 block w-24 rounded-lg border border-ink/20 bg-white px-3 py-2 text-sm outline-none focus:border-sakura"
+          className="mt-1 block w-24 rounded-lg border border-ink/20 bg-white px-3 py-2 font-mono text-sm outline-none focus:border-sakura"
         />
       </div>
 
       <div>
-        <label htmlFor="maxPrice" className="text-xs font-medium uppercase tracking-wide text-ink-soft">
+        <label htmlFor="maxPrice" className="label-tag text-ink-faint">
           Prix max
         </label>
         <input
@@ -85,7 +98,7 @@ export function CatalogueFilters({ categories }: { categories: Category[] }) {
           min={0}
           defaultValue={searchParams.get("maxPrice") ?? ""}
           onBlur={(e) => updateParam("maxPrice", e.target.value)}
-          className="mt-1 block w-24 rounded-lg border border-ink/20 bg-white px-3 py-2 text-sm outline-none focus:border-sakura"
+          className="mt-1 block w-24 rounded-lg border border-ink/20 bg-white px-3 py-2 font-mono text-sm outline-none focus:border-sakura"
         />
       </div>
 

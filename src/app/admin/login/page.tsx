@@ -56,7 +56,7 @@ export default async function AdminLoginPage(
           </div>
           <button
             type="submit"
-            className="w-full rounded-full bg-ink px-4 py-2 text-sm font-semibold text-cream transition-colors hover:bg-ink-soft"
+            className="w-full rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-cream transition-colors hover:bg-ink-soft"
           >
             Se connecter
           </button>
